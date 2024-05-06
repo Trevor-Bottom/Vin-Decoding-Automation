@@ -1,0 +1,102 @@
+Maintenance Guide for VIN Decoder Application
+
+1. Overview
+This guide provides comprehensive maintenance instructions for a VIN decoder application designed to handle a list of Vehicle Identification Numbers (VINs) and output a CSV file containing the vehicle type, body class, weight, and classification. The application leverages the Flask web framework for Python and Selenium for web browser automation. The Chrome Web Driver must be installed on every device for the application to run correctly.
+
+
+2. Main Components
+- app.py: The core Python script containing the Flask application, routing, and logic for interacting with the web page for VIN data scraping.
+  
+- templates/index.html: The HTML template for the application's front end where users input the VIN numbers.
+
+- output CSV file: Not a static file; it is generated dynamically and sent to the user for download.
+
+
+3. Key Functions in app.py
+- open_browser(): Opens the default web browser to the application's home page upon startup.
+
+- scrape_vin_data(vin_numbers): Takes a list of VIN numbers, scrapes the required data using Selenium, and stores it in a pandas DataFrame.
+
+- index(): Renders the `index.html` template to display the home page.
+
+- submit(): Processes the posted VIN numbers, invokes `scrape_vin_data()`, and returns a CSV file in the response.
+
+
+4. Maintenance Tips
+- Website Structure Changes: If the NHTSA website updates its layout or structure, the XPaths in `scrape_vin_data` may need adjustments to accurately locate and extract data.
+
+- Selenium WebDriver: Verify the WebDriver compatibility with the installed browser version. Keep the WebDriver executable updated.
+
+- Output File Naming: The output CSV file name is managed in the `submit()` function. To change the filename, modify the `Content-disposition` in the response headers.
+
+- Adding Output Columns: To introduce additional columns in the output CSV, append them to the DataFrame in `scrape_vin_data()` and ensure the columns are included when converting to CSV.
+
+
+5. Modifying the User Interface (index.html)
+- Styling Changes: Update the CSS properties within the `<style>` section to alter the design, such as colors and layouts.
+
+- Text and Labels: Modify the text within the HTML tags to change button labels or instructions.
+
+
+6. Running the Application from the Command Prompt
+
+To run the VIN Decoder Application from the command prompt, follow these detailed steps:
+
+a. Open Command Prompt:
+   - Press `Win + R` to open the Run dialog.
+   - Type `cmd` and press `Enter` to open the Command Prompt window.
+
+b. Navigate to the Project Directory:
+   - Use the `cd` command to change the directory to where your application is stored. For example, if your application is in `C:\Users\YourUsername\Documents\VINDecoder`, you would type:
+     ```
+     cd C:\Users\YourUsername\Documents\VINDecoder
+     ```
+
+c. Run the Application:
+   - Type the following command and press `Enter`:
+     ```
+     python app.py
+     ```
+   - This command will start the Flask server and should automatically open your default web browser to `http://127.0.0.1:5000/`. If the browser does not open automatically, you can manually enter the URL into your browser’s address bar to access the application.
+
+d. Stop the Application:
+   - To stop the application, return to the Command Prompt window and press `CTRL + C`. This will stop the Flask server and free up the port it was using.
+
+
+7. Troubleshooting Common Command Line Issues
+
+- Python Not Recognized:
+  - If you receive an error saying 'Python is not recognized as an internal or external command,' it likely means Python is not installed or not added to the PATH environment variable. To resolve this:
+    - Ensure Python is installed on your system.
+    - Add Python to the system PATH. You can find instructions on how to do this in the Python documentation or seek help from your IT department.
+
+- Module Not Found Error:
+  - If you see errors like 'ModuleNotFoundError: No module named 'Flask'', it indicates that the required Python packages are not installed. Install them using:
+    ```
+    pip install Flask selenium pandas
+    ```
+
+- Access Denied When Running the Command:
+  - This error might occur if you do not have sufficient privileges. Try running the Command Prompt as an administrator by right-clicking on the Command Prompt and selecting 'Run as administrator'.
+
+
+8. Additional Considerations
+- Code Modifications: Changes in the code should only be performed by someone familiar with Python and Flask. Improper alterations may cause the application to malfunction.
+
+- Selenium Automation: If there are issues with the automated browser actions, review the Selenium documentation and ensure the logic in `scrape_vin_data()` matches the current behavior of the web pages it interacts with.
+
+- Python and Flask Updates: Keep the Python environment and Flask framework up to date. Apply updates during a maintenance window as they may introduce breaking changes.
+
+- Security Updates: Regularly check for and apply security updates to all dependencies.
+
+- Logging: Implement detailed logging to troubleshoot any issues that may arise.
+
+- Error Handling: Review and update error handling within the application to ensure it gracefully manages unexpected situations.
+
+
+9. Troubleshooting Common Issues
+- CSV File Not Generating: Verify the Flask route, check Selenium WebDriver functionality, and ensure the correct writing and reading of in-memory data.
+
+- Web Page Not Displaying: Check Flask routing, template rendering, and that the Flask server is running.
+
+- Application Not Starting: Ensure there are no syntax errors, all dependencies are installed, and the Python environment is properly set up.

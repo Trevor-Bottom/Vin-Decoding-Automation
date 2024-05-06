@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VIN Decoder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #0A2442;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #0b9166;
+            margin-top: 40px;
+            outline: white;
+        }
+        form {
+            margin-top: 40px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        textarea {
+            width: 350px;
+            height: 300px;
+            padding: 10px;
+            margin: 0 auto;
+            display: block;
+            border-radius: 5px;
+            background-color: white;
+            color: black;
+        }
+        input[type="submit"] {
+            margin-top: 10px;
+            padding: 13px 19px;
+            background-color: white;
+            color: #0A2442;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0b9166;
+            color: white;
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Brown & Riding VIN Decoder</h1>
+    <form action="/submit" method="post">
+        <textarea id="vin_numbers" name="vin_numbers" rows="10" cols="50"
+        placeholder="Paste VIN"></textarea>
+        <input type="submit" value="Decode">
+    </form>
+</body>
+</html>
